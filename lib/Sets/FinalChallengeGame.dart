@@ -1,0 +1,419 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:more_practice/SuccessPage.dart';
+import 'package:more_practice/SetsPage.dart';
+import 'package:audioplayers/audio_cache.dart';
+
+class FinalChallenge extends StatefulWidget {
+  @override
+  _FinalChallengeState createState() => _FinalChallengeState();
+}
+
+class _FinalChallengeState extends State<FinalChallenge> {
+  int generateRandomNumber(listLength) {
+    var random = new Random();
+    return random.nextInt(listLength) + 1;
+  }
+
+  var wordsList = ['Slide1.JPG',
+    'Slide2.JPG',
+    'Slide3.JPG',
+    'Slide4.JPG',
+    'Slide5.JPG',
+    'Slide6.JPG',
+    'Slide7.JPG',
+    'Slide8.JPG',
+    'Slide9.JPG',
+    'Slide10.JPG',
+    'Slide11.JPG',
+    'Slide12.JPG',
+    'Slide13.JPG',
+    'Slide14.JPG',
+    'Slide15.JPG',
+    'Slide16.JPG',
+    'Slide17.JPG',
+    'Slide18.JPG',
+    'Slide19.JPG',
+    'Slide20.JPG',
+    'Slide21.JPG',
+    'Slide22.JPG',
+    'Slide23.JPG',
+    'Slide24.JPG',
+    'Slide25.JPG',
+    'Slide26.JPG',
+    'Slide27.JPG',
+    'Slide28.JPG',
+    'Slide29.JPG',
+    'Slide30.JPG',
+    'Slide31.JPG',
+    'Slide32.JPG',
+    'Slide33.JPG',
+    'Slide34.JPG',
+    'Slide35.JPG',
+    'Slide36.JPG',
+    'Slide37.JPG',
+    'Slide38.JPG',
+    'Slide39.JPG',
+    'Slide40.JPG',
+    'Slide41.JPG',
+    'Slide42.JPG',
+    'Slide43.JPG',
+    'Slide44.JPG',
+    'Slide45.JPG',
+    'Slide46.JPG',
+    'Slide47.JPG',
+    'Slide48.JPG',
+    'Slide49.JPG',
+    'Slide50.JPG',
+    'Slide51.JPG',
+    'Slide52.JPG',
+    'Slide53.JPG',
+    'Slide54.JPG',
+    'Slide55.JPG',
+    'Slide56.JPG',
+    'Slide57.JPG',
+    'Slide58.JPG',
+    'Slide59.JPG',
+    'Slide60.JPG',
+    'Slide61.JPG',
+    'Slide62.JPG',
+    'Slide63.JPG',
+    'Slide64.JPG',
+    'Slide65.JPG',
+    'Slide66.JPG',
+    'Slide67.JPG',
+    'Slide68.JPG',
+    'Slide69.JPG',
+    'Slide70.JPG',
+    'Slide71.JPG',
+    'Slide72.JPG',
+    'Slide73.JPG',
+    'Slide74.JPG',
+    'Slide75.JPG',
+    'Slide76.JPG',
+    'Slide77.JPG',
+    'Slide78.JPG',
+    'Slide79.JPG',
+    'Slide80.JPG',
+    'Slide81.JPG',
+    'Slide82.JPG',
+    'Slide83.JPG',
+    'Slide84.JPG',
+    'Slide85.JPG',
+    'Slide86.JPG',
+    'Slide87.JPG',
+    'Slide88.JPG',
+    'Slide89.JPG',
+    'Slide90.JPG',
+    'Slide91.JPG',
+    'Slide92.JPG',
+    'Slide93.JPG',
+    'Slide94.JPG',
+    'Slide95.JPG',
+    'Slide96.JPG',
+    'Slide97.JPG',
+    'Slide98.JPG',
+    'Slide99.JPG',
+    'Slide100.JPG',
+  ];
+  int image;int option1;int option2;int option3;int option4;
+
+  void Player(String sound){
+    final player = AudioCache();
+    player.play(sound);
+  }
+
+  Set CreateSet() {
+    var set = new Set();
+    while (set.length < wordsList.length) {
+      set.add(generateRandomNumber(wordsList.length));
+    }
+    return set;
+  }
+
+  List CreateList(set) {
+    var list = new List();
+    list = set.toList();
+    return list;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    optionsList = CreateList(CreateSet());
+  }
+  List optionsList;
+
+  @override
+  Widget build(BuildContext context) {
+    option1 = optionsList[0];
+    if (optionsList.length > 1) {
+      option2 = optionsList[1];
+    } else {
+      option2 = 0;
+    }
+    if (optionsList.length > 2) {
+      option3 = optionsList[2];
+    } else {
+      option3 = 0;
+    }
+    if (optionsList.length > 3) {
+      option4 = optionsList[3];
+    } else {
+      option4 = 0;
+    }
+    var imagesList = [option1, option2, option3, option4];
+    image = (imagesList..shuffle()).first;
+    if (image == 0) {
+      while (image == 0) {
+        image = (imagesList..shuffle()).first;
+      }
+    }
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(image: DecorationImage(image: AssetImage("images/background.jpg"), fit: BoxFit.fill)),),
+          Column(
+            children: <Widget>[
+              SizedBox(height: 20),
+              Align(
+                alignment: Alignment.topLeft,
+                child: MaterialButton(
+                  child: Container(height: 50, width: 50,
+                    decoration: BoxDecoration(border: Border.all(color: Colors.red, width: 8),
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: [BoxShadow(color: Colors.red,
+                          spreadRadius: 5,
+                          blurRadius: 7,)
+                        ]
+                    ),
+                    child: Icon(Icons.arrow_back, color: Colors.black,),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SetsPage()),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                height: 200,
+                width: 250,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("images/$image.jpg"),
+                        fit: BoxFit.fill),
+                    border: Border.all(color: Color(0xFFBDBDBD), width: 8),
+                    borderRadius: BorderRadius.circular(25),
+                    boxShadow: [
+                      BoxShadow(color: Color(0xFFFFFFFF),
+                          spreadRadius: 5,
+                          blurRadius: 7)
+                    ]
+                ),
+              ),
+              SizedBox(height: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  MaterialButton(
+                    enableFeedback: false,
+                    child: Container(
+                      height: 90,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("images/Slide$option1.JPG")),
+                          border: Border.all(
+                              color: Color(0xFFBDBDBD), width: 8),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [BoxShadow(color: Color(0xFFFFFFFF),
+                            spreadRadius: 5,
+                            blurRadius: 7,)
+                          ]
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (option1 == image) {
+                          optionsList.remove(option1);
+                          Player("correctSound.wav");
+                          if (optionsList.length < 2) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SuccessPage()),
+                            );
+                          }
+                        } else {
+                          Player("click-back.mp3");
+                        }
+                      });
+                    },
+                  ),
+                  MaterialButton(
+                    enableFeedback: false,
+                    child: Container(
+                      height: 90,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("images/Slide$option2.JPG")),
+                          border: Border.all(
+                              color: Color(0xFFBDBDBD), width: 8),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [BoxShadow(color: Color(0xFFFFFFFF),
+                            spreadRadius: 5,
+                            blurRadius: 7,)
+                          ]
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (option2 == image) {
+                          Player("correctSound.wav");
+                          optionsList.remove(option2);
+                          if (optionsList.length < 2) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SuccessPage()),
+                            );
+                          }
+                        } else {
+                          Player("click-back.mp3");
+                        }
+                      });
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(height: 25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  MaterialButton(
+                    enableFeedback: false,
+                    child: Container(
+                      height: 90,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("images/Slide$option3.JPG")),
+                          border: Border.all(
+                              color: Color(0xFFBDBDBD), width: 8),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [BoxShadow(color: Color(0xFFFFFFFF),
+                            spreadRadius: 5,
+                            blurRadius: 7,)
+                          ]
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (option3 == image) {
+                          Player("correctSound.wav");
+                          optionsList.remove(option3);
+                          if (optionsList.length < 2) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SuccessPage()),
+                            );
+                          }
+                        } else {
+                          Player("click-back.mp3");
+                        }
+                      });
+                    },
+                  ),
+                  MaterialButton(
+                    enableFeedback: false,
+                    child: Container(
+                      height: 90,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("images/Slide$option4.JPG")),
+                          border: Border.all(
+                              color: Color(0xFFBDBDBD), width: 8),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [BoxShadow(color: Color(0xFFFFFFFF),
+                            spreadRadius: 5,
+                            blurRadius: 7,)
+                          ]
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (option4 == image) {
+                          Player("correctSound.wav");
+                          optionsList.remove(option4);
+                          if (optionsList.length < 2) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SuccessPage()),
+                            );
+                          }
+                        } else {
+                          Player("click-back.mp3");
+                        }
+                      });
+                    },
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 25),
+              Stack(
+                alignment: Alignment.topCenter,
+                children: <Widget>[
+                  Container(
+                    height: 160,
+                    width: 160,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xFFBDBDBD), width: 8),
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: [
+                          BoxShadow(color: Color(0xFFFFFFFF),
+                            spreadRadius: 5,
+                            blurRadius: 7,)
+                        ]
+                    ),
+                  ),
+                  CircularPercentIndicator(
+                    backgroundColor: Color(0xFFD1C4E9),
+                    radius: 150.0,
+                    lineWidth: 13.0,
+                    animation: true,
+                    percent: (((wordsList.length - 1) -
+                        (optionsList.length - 1)) / (wordsList.length - 1)),
+                    center: new Text(
+                      "${(((((wordsList.length - 1) - (optionsList.length -
+                          1)) / (wordsList.length - 1)) * 100)
+                          .round())}% \n complete",
+                      style:
+                      new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                      textAlign: TextAlign.center,
+                    ),
+                    circularStrokeCap: CircularStrokeCap.round,
+                    progressColor: Color(0xFF03A9F4),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
